@@ -1,0 +1,49 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 20px;
+}
+
+.sudoku-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+}
+
+.sudoku-board {
+    border-collapse: collapse;
+    border: 2px solid black;
+}
+
+.sudoku-board td {
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    border: 1px solid #ccc;
+}
+
+/* Add border styling for the subgrids */
+.sudoku-board tr:nth-child(3n) {
+    border-bottom: 2px solid black;
+}
+
+.sudoku-board td:nth-child(3n) {
+    border-right: 2px solid black;
+}
+
+button {
+    font-size: 18px;
+    padding: 10px 20px;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.timer {
+    font-size: 18px;
+    font-weight: bold;
+    color: #1E1E1F;
+    margin-bottom: 10px; /* Add margin at the bottom for spacing */
+}
