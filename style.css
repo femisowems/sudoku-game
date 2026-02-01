@@ -1,49 +1,181 @@
-body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    margin: 20px;
+:root {
+    --bg-color: #f0f2f5;
+    --board-bg: #ffffff;
+    --primary-color: #3498db;
+    --primary-hover: #2980b9;
+    --secondary-color: #95a5a6;
+    --secondary-hover: #7f8c8d;
+    --text-color: #2c3e50;
+    --border-color: #34495e;
+    --grid-line: #bdc3c7;
+    --initial-num: #2c3e50;
+    --user-num: #3498db;
+    --error-color: #e74c3c;
+    --highlight-color: #eaf2f8;
 }
 
-.sudoku-container {
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 20px;
+    margin: 0;
+    min-height: 100vh;
+}
+
+header {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+h1 {
+    margin: 0;
+    font-weight: 300;
+    font-size: 2.5rem;
+    color: var(--text-color);
+}
+
+.game-container {
+    background: var(--board-bg);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.status-bar {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 20px;
+    align-items: center;
+    height: 30px;
+}
+
+.timer {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+.message {
+    font-size: 1rem;
+    font-weight: 600;
 }
 
 .sudoku-board {
     border-collapse: collapse;
-    border: 2px solid black;
+    border: 3px solid var(--border-color);
+    margin-bottom: 25px;
 }
 
 .sudoku-board td {
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     text-align: center;
-    font-size: 24px;
-    font-weight: bold;
-    border: 1px solid #ccc;
+    font-size: 1.5rem;
+    border: 1px solid var(--grid-line);
+    cursor: default;
+    transition: background-color 0.2s;
 }
 
-/* Add border styling for the subgrids */
-.sudoku-board tr:nth-child(3n) {
-    border-bottom: 2px solid black;
+/* Thicker borders for 3x3 grids */
+.sudoku-board tr:nth-child(3n) td {
+    border-bottom: 3px solid var(--border-color);
+}
+.sudoku-board tr:last-child td {
+    border-bottom: none; /* handled by table border */
 }
 
 .sudoku-board td:nth-child(3n) {
-    border-right: 2px solid black;
+    border-right: 3px solid var(--border-color);
+}
+.sudoku-board td:last-child {
+    border-right: none; /* handled by table border */
 }
 
-button {
-    font-size: 18px;
-    padding: 10px 20px;
-    margin: 10px;
-    cursor: pointer;
-}
-
-.timer {
-    font-size: 18px;
+/* Cell content styles */
+.sudoku-board td.initial {
+    background-color: #ecf0f1;
+    color: var(--initial-num);
     font-weight: bold;
-    color: #1E1E1F;
-    margin-bottom: 10px; /* Add margin at the bottom for spacing */
+}
+
+.sudoku-board td.editable {
+    background-color: white;
+    color: var(--user-num);
+    cursor: text;
+}
+
+.sudoku-board td.editable:focus {
+    background-color: var(--highlight-color);
+    outline: none;
+}
+
+.sudoku-board td.error {
+    background-color: rgba(231, 76, 60, 0.2);
+    animation: shake 0.3s;
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-2px); }
+    75% { transform: translateX(2px); }
+    100% { transform: translateX(0); }
+}
+
+.controls {
+    display: flex;
+    gap: 15px;
+}
+
+.btn {
+    padding: 10px 25px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.btn:active {
+    transform: translateY(2px);
+}
+
+.primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+.primary:hover {
+    background-color: var(--primary-hover);
+}
+
+.secondary {
+    background-color: var(--secondary-color);
+    color: white;
+}
+.secondary:hover {
+    background-color: var(--secondary-hover);
+}
+
+@media (max-width: 600px) {
+    .sudoku-board td {
+        width: 35px;
+        height: 35px;
+        font-size: 1.2rem;
+    }
+    
+    .game-container {
+        padding: 15px;
+        width: 95%;
+        box-sizing: border-box;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
 }
